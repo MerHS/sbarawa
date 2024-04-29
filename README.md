@@ -1,2 +1,1 @@
-# sbarawa
-THE only drum sheet application for drummers
+# SBARAWA: Flutter drum sheet application for drummers by a drummer
