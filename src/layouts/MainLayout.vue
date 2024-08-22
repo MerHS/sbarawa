@@ -1,35 +1,39 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
-    <q-header elevated>
+  <q-layout view="hHh lpR fFr">
+    <q-header elevated class="bg-primary text-white">
       <q-toolbar>
         <q-btn
           flat
           dense
           round
-          icon="menu"
-          aria-label="Menu"
-          @click="toggleLeftDrawer"
+          icon="settings"
+          aria-label="Settings"
+          @click="leftDrawerOpen = !leftDrawerOpen"
         />
 
-        <q-toolbar-title>
-          Quasar App
-        </q-toolbar-title>
+        <q-toolbar-title> SBARAWA - Drum sheet editor </q-toolbar-title>
 
-        <div>Quasar v{{ $q.version }}</div>
+        <q-btn
+          aria-label="Menu"
+          dense
+          flat
+          icon="menu"
+          round
+          class="q-ml-xs"
+          @click="rightDrawerOpen = !rightDrawerOpen"
+        />
       </q-toolbar>
+
+      <q-tabs align="left">
+        <q-route-tab to="/editor/test1" label="Page One" />
+        <q-route-tab to="/editor/test2" label="Page Two" />
+        <q-route-tab to="/editor/test3" label="Page Three" />
+      </q-tabs>
     </q-header>
 
-    <q-drawer
-      v-model="leftDrawerOpen"
-      show-if-above
-      bordered
-    >
+    <q-drawer v-model="leftDrawerOpen" show-if-above bordered>
       <q-list>
-        <q-item-label
-          header
-        >
-          Essential Links
-        </q-item-label>
+        <q-item-label header> Essential Links </q-item-label>
 
         <EssentialLink
           v-for="link in linksList"
@@ -42,15 +46,25 @@
     <q-page-container>
       <router-view />
     </q-page-container>
+
+    <q-footer bordered class="bg-grey-8 text-white">
+      <q-toolbar>
+        <q-icon :name="editModeIcon" />
+        <q-space></q-space>
+        &copy; 2024 Kisoyo. / v{{ mainVersion }}
+      </q-toolbar>
+    </q-footer>
   </q-layout>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import EssentialLink, { EssentialLinkProps } from 'components/EssentialLink.vue';
+import EssentialLink, {
+  EssentialLinkProps,
+} from 'components/EssentialLink.vue';
 
 defineOptions({
-  name: 'MainLayout'
+  name: 'MainLayout',
 });
 
 const linksList: EssentialLinkProps[] = [
@@ -58,49 +72,18 @@ const linksList: EssentialLinkProps[] = [
     title: 'Docs',
     caption: 'quasar.dev',
     icon: 'school',
-    link: 'https://quasar.dev'
+    link: 'https://quasar.dev',
   },
   {
     title: 'Github',
     caption: 'github.com/quasarframework',
     icon: 'code',
-    link: 'https://github.com/quasarframework'
+    link: 'https://github.com/quasarframework',
   },
-  {
-    title: 'Discord Chat Channel',
-    caption: 'chat.quasar.dev',
-    icon: 'chat',
-    link: 'https://chat.quasar.dev'
-  },
-  {
-    title: 'Forum',
-    caption: 'forum.quasar.dev',
-    icon: 'record_voice_over',
-    link: 'https://forum.quasar.dev'
-  },
-  {
-    title: 'Twitter',
-    caption: '@quasarframework',
-    icon: 'rss_feed',
-    link: 'https://twitter.quasar.dev'
-  },
-  {
-    title: 'Facebook',
-    caption: '@QuasarFramework',
-    icon: 'public',
-    link: 'https://facebook.quasar.dev'
-  },
-  {
-    title: 'Quasar Awesome',
-    caption: 'Community Quasar projects',
-    icon: 'favorite',
-    link: 'https://awesome.quasar.dev'
-  }
 ];
 
 const leftDrawerOpen = ref(false);
-
-function toggleLeftDrawer () {
-  leftDrawerOpen.value = !leftDrawerOpen.value;
-}
+const rightDrawerOpen = ref(false);
+const editModeIcon = ref('edit');
+const mainVersion = ref('v0.0.1');
 </script>

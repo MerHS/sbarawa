@@ -1,0 +1,13 @@
+{
+  "name": "sbarawa",
+  "version": "0.0.1",
+  "description": "THE only drum sheet application for drummers",
+  "author": "Ho Young Jhoo <starvessel@naver.com>",
+  "private": true,
+  "dependencies": {
+    "@capacitor/app": "^6.0.0",
+    "@capacitor/cli": "^6.0.0",
+    "@capacitor/core": "^6.0.0",
+    "@capacitor/ios": "^6.0.0"
+  }
+}
